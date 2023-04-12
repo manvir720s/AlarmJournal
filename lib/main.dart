@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:light_alarm/alarm_form.dart';
-import 'package:light_alarm/alarm_manager.dart';
+import 'package:light_alarm/alarm.dart';
+import 'package:light_alarm/jounral.dart';
 
 void main() {
   runApp(const MyApp());
@@ -15,7 +15,7 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       title: 'Flutter Demo',
       theme: ThemeData(
-        primarySwatch: Colors.blue,
+        primarySwatch: Colors.grey,
       ),
       home: const MyHomePage(title: 'Light Alarm'),
     );
@@ -42,6 +42,7 @@ class MyHomePage extends StatefulWidget {
 
 class _MyHomePageState extends State<MyHomePage> {
   int _counter = 0;
+  int currentIndex = 0;
 
   void _incrementCounter() {
     setState(() {
@@ -62,30 +63,50 @@ class _MyHomePageState extends State<MyHomePage> {
     // The Flutter framework has been optimized to make rerunning build methods
     // fast, so that you can just rebuild anything that needs updating rather
     // than having to individually change instances of widgets.
+    final screens = [
+      Alarm(counter: '$_counter'),
+      Journal(counter: '$_counter')
+    ];
+
     return Scaffold(
       appBar: AppBar(
-        title: Text(widget.title),
+        title: Text(
+          widget.title,
+          style: TextStyle(color: Colors.green.shade400, fontSize: 30),
+        ),
+        backgroundColor: Colors.grey.shade900,
       ),
       body: Center(
         child: Padding(
           padding: const EdgeInsets.all(12.0),
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.start,
-            children: <Widget>[
-              // two widgets here one for CurrentAlarm and second for AlarmForm
-              const AlarmManager(
-                  description:
-                      "You have pushed the button this many times and more lines to test padding: "),
-              AlarmForm(counter: '$_counter')
-            ],
-          ),
+          child: screens[currentIndex],
         ),
       ),
-      floatingActionButton: FloatingActionButton(
-        onPressed: _incrementCounter,
-        tooltip: 'Increment',
-        child: const Icon(Icons.add),
+      bottomNavigationBar: BottomNavigationBar(
+        type: BottomNavigationBarType.fixed,
+        backgroundColor: Colors.grey.shade900,
+        selectedItemColor: Colors.green[400],
+        currentIndex: currentIndex,
+        onTap: (index) => setState(() => currentIndex = index),
+        items: const [
+          BottomNavigationBarItem(
+            icon: Icon(
+              Icons.alarm,
+            ),
+            label: 'Alarm',
+          ),
+          BottomNavigationBarItem(
+            icon: Icon(
+              Icons.notes,
+            ),
+            label: 'Journal',
+          ),
+        ],
+        unselectedItemColor: Colors.white54,
+        unselectedFontSize: 14,
+        selectedFontSize: 16,
       ),
+      backgroundColor: Colors.grey.shade800,
     );
   }
 }

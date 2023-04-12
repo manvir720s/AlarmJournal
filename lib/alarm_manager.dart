@@ -39,52 +39,59 @@ class _AlarmManagerState extends State<AlarmManager> {
     // fast, so that you can just rebuild anything that needs updating rather
     // than having to individually change instances of widgets.
     return Card(
-      color: Colors.grey[300],
-      child: SizedBox(
-        child: Column(
-          children: <Widget>[
-            ListTile(
-              leading: const Icon(
-                Icons.access_alarms,
-                size: 48.0,
-              ),
-              title: Text.rich(
-                TextSpan(children: <TextSpan>[
-                  const TextSpan(
-                    text: "Next Alarm: ",
-                    style: TextStyle(fontWeight: FontWeight.bold),
-                  ),
-                  TextSpan(
-                      text: widget.description,
-                      style: const TextStyle(fontStyle: FontStyle.italic)),
-                ]),
-              ),
-              // title: const Text(
-              //   'Next Alarm:',
-              //   style: TextStyle(fontWeight: FontWeight.bold),
-              // ), // bigger and bold
-            ),
-            const SizedBox(
-              height: 10,
-            ),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: <Widget>[
-                SizedBox(
-                  width: 200,
-                  child: ElevatedButton(
-                    child: const Text('CANCEL'),
-                    onPressed: () {/* ... */},
-                    style: ButtonStyle(
-                        backgroundColor: MaterialStateProperty.all(Colors.red)),
-                  ),
+      color: Colors.black12,
+      child: Padding(
+        padding: const EdgeInsets.all(8.0),
+        child: SizedBox(
+          child: Column(
+            children: <Widget>[
+              ListTile(
+                leading: Icon(
+                  Icons.access_alarms,
+                  size: 48.0,
+                  color: Colors.green.shade400,
                 ),
-                const SizedBox(
-                  height: 10,
+                title: Text.rich(
+                  TextSpan(children: <TextSpan>[
+                    const TextSpan(
+                      text: "Next Alarm: ",
+                      style: TextStyle(
+                          fontWeight: FontWeight.bold, color: Colors.grey),
+                    ),
+                    TextSpan(
+                        text: widget.description,
+                        style: const TextStyle(
+                            fontStyle: FontStyle.italic, color: Colors.grey)),
+                  ]),
                 ),
-              ],
-            ),
-          ],
+                // title: const Text(
+                //   'Next Alarm:',
+                //   style: TextStyle(fontWeight: FontWeight.bold),
+                // ), // bigger and bold
+              ),
+              const SizedBox(
+                height: 10,
+              ),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: <Widget>[
+                  SizedBox(
+                    width: 200,
+                    child: ElevatedButton(
+                      child: const Text('CANCEL'),
+                      onPressed: () {/* ... */},
+                      style: ButtonStyle(
+                          backgroundColor:
+                              MaterialStateProperty.all(Colors.red)),
+                    ),
+                  ),
+                  const SizedBox(
+                    height: 10,
+                  ),
+                ],
+              ),
+            ],
+          ),
         ),
       ),
     );
