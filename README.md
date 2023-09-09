@@ -1,4 +1,4 @@
-# light_alarm
+# Alarm Journal
 
 A new Flutter project.
 
