@@ -1,36 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
+import 'package:audioplayers/audioplayers.dart';
 
 class AlarmForm extends StatefulWidget {
-  const AlarmForm({Key? key, required this.counter}) : super(key: key);
-
-  // This widget is the home page of your application. It is stateful, meaning
-  // that it has a State object (defined below) that contains fields that affect
-  // how it looks.
-
-  // This class is the configuration for the state. It holds the values (in this
-  // case the title) provided by the parent (in this case the App widget) and
-  // used by the build method of the State. Fields in a Widget subclass are
-  // always marked "final".
-
-  final String counter;
+  const AlarmForm({Key? key}) : super(key: key);
 
   @override
   State<AlarmForm> createState() => _AlarmFormState();
 }
 
 class _AlarmFormState extends State<AlarmForm> {
-  // void _incrementCounter() {
-  //   setState(() {
-  //     // This call to setState tells the Flutter framework that something has
-  //     // changed in this State, which causes it to rerun the build method below
-  //     // so that the display can reflect the updated values. If we changed
-  //     // _counter without calling setState(), then the build method would not be
-  //     // called again, and so nothing would appear to happen.
-  //     _counter++;
-  //   });
-  // }
-  // ignore: non_constant_identifier_names
   var days = {
     "Monday": false,
     "Tuesday": false,
@@ -57,20 +36,15 @@ class _AlarmFormState extends State<AlarmForm> {
     );
 
     if (pickedTime != null) {
-      print(pickedTime.format(context)); //output 10:51 PM
       DateTime parsedTime =
           DateFormat.jm().parse(pickedTime.format(context).toString());
       //converting to DateTime so that we can further format on different pattern.
-      print(parsedTime); //output 1970-01-01 22:53:00.000
       String formattedTime = DateFormat('HH:mm:ss').format(parsedTime);
-      print(formattedTime); //output 14:59:00
       //DateFormat() is from intl package, you can format the time on any pattern you need.
 
       setState(() {
         timeinput.text = formattedTime; //set the value of text field.
       });
-    } else {
-      print("Time is not selected");
     }
   }
 
@@ -98,10 +72,6 @@ class _AlarmFormState extends State<AlarmForm> {
                       fontSize: 20),
                 ),
               ),
-              // title: const Text(
-              //   'Next Alarm:',
-              //   style: TextStyle(fontWeight: FontWeight.bold),
-              // ), // bigger and bold
             ),
             Padding(
               padding: const EdgeInsets.only(left: 16, right: 16),
@@ -118,7 +88,7 @@ class _AlarmFormState extends State<AlarmForm> {
                     fillColor: Colors.green,
                     labelStyle: TextStyle(
                       fontWeight: FontWeight.bold,
-                      color: Colors.grey, //<-- SEE HERE
+                      color: Colors.grey,
                     ),
                     enabledBorder: UnderlineInputBorder(
                       borderSide: BorderSide(color: Colors.grey),
@@ -134,11 +104,11 @@ class _AlarmFormState extends State<AlarmForm> {
                 ),
               ),
             ),
-            Padding(
-              padding: const EdgeInsets.only(left: 16, right: 16, top: 8),
+            const Padding(
+              padding: EdgeInsets.only(left: 16, right: 16, top: 8),
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.start,
-                children: const [
+                children: [
                   Icon(
                     Icons.calendar_today,
                     color: Colors.grey,
@@ -168,9 +138,9 @@ class _AlarmFormState extends State<AlarmForm> {
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceAround,
                 children: [
-                  Row(
+                  const Row(
                     mainAxisAlignment: MainAxisAlignment.start,
-                    children: const [
+                    children: [
                       Icon(
                         Icons.flashlight_on,
                         color: Colors.grey,
@@ -208,19 +178,41 @@ class _AlarmFormState extends State<AlarmForm> {
                 children: [
                   Row(
                     mainAxisAlignment: MainAxisAlignment.start,
-                    children: const [
-                      Icon(
-                        Icons.volume_up,
-                        color: Colors.grey,
-                      ),
-                      SizedBox(width: 5),
-                      Text(
-                        ("Select Sound:"),
-                        style: TextStyle(
-                            fontWeight: FontWeight.bold,
+                    children: [
+                      const Column(
+                        children: [
+                          Icon(
+                            Icons.volume_up,
                             color: Colors.grey,
-                            fontSize: 12),
+                          ),
+                          Text(
+                            ("Select Sound:"),
+                            style: TextStyle(
+                                fontWeight: FontWeight.bold,
+                                color: Colors.grey,
+                                fontSize: 12),
+                          ),
+                        ],
                       ),
+                      const SizedBox(width: 10),
+                      Column(
+                        children: [
+                          ElevatedButton(
+                              onPressed: () {
+                                final player = AudioCache();
+                                player.play('iPhone Rader.mp3');
+                              },
+                              child: const Icon(Icons.music_note_rounded)),
+                          const SizedBox(width: 5),
+                          const Text(
+                            ("iPhone Radar"),
+                            style: TextStyle(
+                                fontWeight: FontWeight.bold,
+                                color: Colors.grey,
+                                fontSize: 12),
+                          ),
+                        ],
+                      )
                     ],
                   ),
                 ],
@@ -257,7 +249,7 @@ class _AlarmFormState extends State<AlarmForm> {
   Widget box(
       String title, bool? isChecked, MaterialAccentColor deepPurpleAccent) {
     return Container(
-        margin: EdgeInsets.all(5),
+        margin: const EdgeInsets.all(5),
         width: 70,
         alignment: Alignment.center,
         color: Colors.black12,
@@ -274,7 +266,8 @@ class _AlarmFormState extends State<AlarmForm> {
                 });
               },
             ),
-            Text(title, style: TextStyle(color: Colors.grey, fontSize: 12)),
+            Text(title,
+                style: const TextStyle(color: Colors.grey, fontSize: 12)),
           ],
         ));
   }
