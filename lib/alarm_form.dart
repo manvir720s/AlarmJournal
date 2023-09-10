@@ -10,6 +10,7 @@ class AlarmForm extends StatefulWidget {
 }
 
 class _AlarmFormState extends State<AlarmForm> {
+  // Define days of the week as a map with initial values as false.
   var days = {
     "Monday": false,
     "Tuesday": false,
@@ -25,11 +26,13 @@ class _AlarmFormState extends State<AlarmForm> {
 
   @override
   void initState() {
-    timeinput.text = "HH:MM:SS"; //set the initial value of text field
+    // Initialize the text field with a default value.
+    timeinput.text = "HH:MM:SS";
     super.initState();
   }
 
   void _handleSetAlarm() async {
+    // Show a time picker dialog to set the alarm time.
     TimeOfDay? pickedTime = await showTimePicker(
       initialTime: TimeOfDay.now(),
       context: context,
@@ -38,25 +41,16 @@ class _AlarmFormState extends State<AlarmForm> {
     if (pickedTime != null) {
       DateTime parsedTime =
           DateFormat.jm().parse(pickedTime.format(context).toString());
-      //converting to DateTime so that we can further format on different pattern.
       String formattedTime = DateFormat('HH:mm:ss').format(parsedTime);
-      //DateFormat() is from intl package, you can format the time on any pattern you need.
 
       setState(() {
-        timeinput.text = formattedTime; //set the value of text field.
+        timeinput.text = formattedTime;
       });
     }
   }
 
   @override
   Widget build(BuildContext context) {
-    // This method is rerun every time setState is called, for instance as done
-    // by the _incrementCounter method above.
-    //
-    // The Flutter framework has been optimized to make rerunning build methods
-    // fast, so that you can just rebuild anything that needs updating rather
-    // than having to individually change instances of widgets.
-
     return Card(
       color: Colors.black12,
       child: SizedBox(
@@ -65,7 +59,7 @@ class _AlarmFormState extends State<AlarmForm> {
             const ListTile(
               title: Center(
                 child: Text(
-                  ("Set Alarm"),
+                  "Set Alarm",
                   style: TextStyle(
                       fontWeight: FontWeight.bold,
                       color: Colors.grey,
@@ -78,12 +72,12 @@ class _AlarmFormState extends State<AlarmForm> {
               child: SizedBox(
                 height: 75,
                 child: TextField(
-                  controller: timeinput, //editing controller of this TextField
+                  controller: timeinput,
                   decoration: const InputDecoration(
                     icon: Icon(
                       Icons.alarm,
                       color: Colors.grey,
-                    ), //icon of text field
+                    ),
                     labelText: "Enter Time",
                     fillColor: Colors.green,
                     labelStyle: TextStyle(
@@ -95,10 +89,9 @@ class _AlarmFormState extends State<AlarmForm> {
                     ),
                     focusedBorder: UnderlineInputBorder(
                       borderSide: BorderSide(color: Colors.grey),
-                    ), //label text of field
+                    ),
                   ),
-                  readOnly:
-                      true, //set it true, so that user will not able to edit text
+                  readOnly: true,
                   onTap: _handleSetAlarm,
                   style: TextStyle(color: Colors.green.shade400),
                 ),
@@ -115,7 +108,7 @@ class _AlarmFormState extends State<AlarmForm> {
                   ),
                   SizedBox(width: 5),
                   Text(
-                    ("Select Days to Repeat:"),
+                    "Select Days to Repeat:",
                     style: TextStyle(
                         fontWeight: FontWeight.bold,
                         color: Colors.grey,
@@ -147,7 +140,7 @@ class _AlarmFormState extends State<AlarmForm> {
                       ),
                       SizedBox(width: 5),
                       Text(
-                        ("Enable Flash:"),
+                        "Enable Flash:",
                         style: TextStyle(
                             fontWeight: FontWeight.bold,
                             color: Colors.grey,
@@ -156,15 +149,12 @@ class _AlarmFormState extends State<AlarmForm> {
                     ],
                   ),
                   Switch.adaptive(
-                    // thumb color (round icon)
                     activeColor: Colors.green,
                     activeTrackColor: Colors.cyan,
                     inactiveThumbColor: Colors.blueGrey.shade600,
                     inactiveTrackColor: Colors.grey.shade400,
                     splashRadius: 50.0,
-                    // boolean variable value
                     value: enableFlash,
-                    // changes the state of the switch
                     onChanged: (value) =>
                         setState(() => enableFlash = (!enableFlash)),
                   ),
@@ -186,7 +176,7 @@ class _AlarmFormState extends State<AlarmForm> {
                             color: Colors.grey,
                           ),
                           Text(
-                            ("Select Sound:"),
+                            "Select Sound:",
                             style: TextStyle(
                                 fontWeight: FontWeight.bold,
                                 color: Colors.grey,
@@ -205,7 +195,7 @@ class _AlarmFormState extends State<AlarmForm> {
                               child: const Icon(Icons.music_note_rounded)),
                           const SizedBox(width: 5),
                           const Text(
-                            ("iPhone Radar"),
+                            "iPhone Radar",
                             style: TextStyle(
                                 fontWeight: FontWeight.bold,
                                 color: Colors.grey,
@@ -227,7 +217,7 @@ class _AlarmFormState extends State<AlarmForm> {
                     child: const Text('SET'),
                     onPressed: () {
                       setState(() {
-                        timeinput.text = 's'; //set the value of text field.
+                        timeinput.text = 's';
                       });
                     },
                     style: ButtonStyle(

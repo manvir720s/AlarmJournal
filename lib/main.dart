@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:light_alarm/alarm.dart';
-import 'package:light_alarm/jounral.dart';
+import 'package:light_alarm/journal.dart';
 
 void main() {
   runApp(const MyApp());
@@ -11,11 +11,13 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    // The main entry point of the application.
     return MaterialApp(
       title: 'Flutter Demo',
       theme: ThemeData(
         primarySwatch: Colors.grey,
       ),
+      // Set the home page of the app to MyHomePage.
       home: const MyHomePage(title: 'Alarm Journal'),
     );
   }
@@ -31,10 +33,12 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
+  // Keep track of the currently selected tab index.
   int currentIndex = 0;
 
   @override
   Widget build(BuildContext context) {
+    // Create a list of screens to display in the app.
     final screens = [const Alarm(), const Journal()];
 
     return Scaffold(
@@ -48,6 +52,7 @@ class _MyHomePageState extends State<MyHomePage> {
       body: Center(
         child: Padding(
           padding: const EdgeInsets.all(12.0),
+          // Display the selected screen based on the currentIndex.
           child: screens[currentIndex],
         ),
       ),
@@ -56,6 +61,7 @@ class _MyHomePageState extends State<MyHomePage> {
         backgroundColor: Colors.grey.shade900,
         selectedItemColor: Colors.green[400],
         currentIndex: currentIndex,
+        // Update the currentIndex when a tab is tapped.
         onTap: (index) => setState(() => currentIndex = index),
         items: const [
           BottomNavigationBarItem(
