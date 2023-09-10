@@ -13,11 +13,10 @@ This Flutter app is designed to allow users to set alarms, customize their repea
 - Keep track of the number of times the snooze button is pressed.
 
 ## Screenshots
-
-![Screenshot 1](./screenshots/Alarm Front Page.JPG)
+![Alarm Front Page](https://github.com/manvir720s/AlarmJournal/assets/70035337/7b98db42-6986-49a2-82ce-2152046f22f6)
 *Screenshot 1: Alarm setup screen.*
 
-![Screenshot 2](./screenshots/Alarm Journal.JPG)
+![Alarm Journal](https://github.com/manvir720s/AlarmJournal/assets/70035337/b9838869-4de6-4843-b691-8ac1aec03141)
 *Screenshot 2: Alarm list with repeat schedule.*
 
 ## Installation
