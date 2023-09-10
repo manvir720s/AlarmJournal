@@ -17,7 +17,7 @@ This Flutter app is designed to allow users to set alarms, customize their repea
 *Screenshot 1: Alarm setup screen.*
 
 ![Alarm Journal](https://github.com/manvir720s/AlarmJournal/assets/70035337/b9838869-4de6-4843-b691-8ac1aec03141)
-*Screenshot 2: Alarm list with repeat schedule.*
+*Screenshot 2: Journal.*
 
 ## Installation
 
